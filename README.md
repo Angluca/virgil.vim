@@ -1,10 +1,15 @@
 #### Vim plugin for virgil language
-
-You can install [vimcomplete](https://github.com/girishji/vimcomplete) and setting [virgil.tags]()  
-[virgil.dict]() for autocomple If you use vim  
-quickly building use ```:make```
 ```vim
-au FileType virgil let $VIRGIL= path.../virgil/std'
-au FileType virgil setl tags+= path.../virgil.tags
-au FileType virgil setl dict= path.../virgil.dict
+Plug 'angluca/virgil.vim'
+# gen vim tags
+bin/utils/vctags lib/**/*.v3
+```
+You can install [vimcomplete](https://github.com/girishji/vimcomplete) and setting [virgil.tags](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.tags)  
+[virgil.dict](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.dict) [virgil.base.dict](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.base.dict) for autocomple If you use vim  
+quickly building use ```:make```
+
+```vim
+au FileType virgil let $VIRGIL= .../virgil'
+au FileType virgil setl tags+= .../virgil.tags
+au FileType virgil setl dict= .../virgil.dict, .../virgil.base.dict
 ```

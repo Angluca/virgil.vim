@@ -13,7 +13,8 @@ endif
 if filereadable("Makefile") || filereadable("makefile")
   CompilerSet makeprg=make
 else
-  CompilerSet makeprg=v3c\ %:p
+  "CompilerSet makeprg=v3c\ %:p
+  CompilerSet makeprg=v3c-host\ `cat\ DEPS`\ *.v3
 endif
 
 CompilerSet errorformat=

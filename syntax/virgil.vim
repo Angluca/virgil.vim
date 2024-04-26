@@ -92,7 +92,7 @@ syn match virgilType '\(\(\W\|^\)\(let\|const\|def\)\s\+[^=]*\w\s*)*\s*:\s*\W*\|
 syn match virgilTypedef  contains=virgilTypedef "\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 syn match virgilFunc    "\%(r#\)\=\%([^[:cntrl:][:space:][:punct:][:digit:]]\|_\)\%([^[:cntrl:][:punct:][:space:]]\|_\)*" display contained
 "syn keyword Keyword   def nextgroup=Function skipwhite skipempty
-syn keyword virgilKeyword union class struct enum namespace component typedef nextgroup=virgilTypedef skipwhite skipempty
+syn keyword virgilKeyword union class struct enum namespace component type nextgroup=virgilTypedef skipwhite skipempty
 syn keyword virgilKeyword union nextgroup=virgilType skipwhite skipempty contained
 "syn match virgilFunc    "\w\(\w\)*\ze\(\[.*\]\s*\)*\s*("
 syn match virgilType    "\w\(\w\)*<"he=e-1,me=e-1 " foo<T>();
