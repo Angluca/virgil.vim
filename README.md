@@ -4,7 +4,7 @@ Plug 'angluca/virgil.vim'
 # gen vim tags
 bin/utils/vctags lib/**/*.v3
 ```
-You can install [vimcomplete](https://github.com/girishji/vimcomplete) and setting [virgil.tags](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.tags)  
+You can install [vimcomplete](https://github.com/girishji/vimcomplete) and setting   
 [virgil.dict](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.dict) [virgil.base.dict](https://github.com/Angluca/AcVim/blob/master/vimfiles/dict/virgil.base.dict) for autocomple If you use vim  
 quickly building use ```:make```
 
