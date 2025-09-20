@@ -2,11 +2,11 @@ if exists("b:current_syntax")
     finish
 endif
 
-syn keyword virgilKeyword class component
+syn keyword virgilKeyword class component layout
 syn keyword virgilKeyword def
 syn keyword virgilKeyword enum extends
 syn keyword virgilKeyword in
-syn keyword virgilKeyword new
+"syn keyword virgilKeyword new
 syn keyword virgilKeyword private
 syn keyword virgilKeyword super
 syn keyword virgilKeyword type
