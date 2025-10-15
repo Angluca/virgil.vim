@@ -43,7 +43,6 @@ endif
 
 augroup virgil.vim
   autocmd!
-
   " Highlight incorrect spacing by default.
   if get(g:, 'virgil_space_error', 1)
     autocmd InsertEnter * hi link virgilSpaceError NONE

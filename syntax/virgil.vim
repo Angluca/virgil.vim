@@ -7,8 +7,7 @@ syn keyword virgilKeyword def
 syn keyword virgilKeyword enum extends
 syn keyword virgilKeyword in
 "syn keyword virgilKeyword new
-syn keyword virgilKeyword private
-syn keyword virgilKeyword super
+syn keyword virgilSuper   private super
 syn keyword virgilKeyword type
 syn keyword virgilKeyword var
 
@@ -21,11 +20,12 @@ syn keyword virgilConditional if else
 
 syn keyword virgilType Array
 syn keyword virgilType bool byte void
-syn keyword virgilType int
-syn keyword virgilType long
 syn keyword virgilType Range range
 syn keyword virgilType string
 syn keyword virgilCharacter true null false
+syn keyword virgilThis this
+syn keyword virgilType short int long float double
+syn match   virgilType '\v(\.@1<!|\.\.)\zs<([iu][0-9]{1,3})?>' display
 
 "syn match virgilOperator "\v\-\>"
 "syn match virgilOperator "\v\=\>"
@@ -44,14 +44,15 @@ syn match Constant       '[{}\[\]()]'
 hi def virgilSymbol ctermfg=DarkGray guifg=DarkGray
 
 hi def link virgilFunc Function
-hi def link virgilTypedef Identifier
-hi def virgilType ctermfg=DarkCyan guifg=DarkCyan
+hi def link virgilTypedef Changed
+"hi def virgilType ctermfg=DarkCyan guifg=DarkCyan
+hi def link virgilType MoreMsg
 "hi def virgilThis ctermfg=DarkMagenta guifg=DarkMagenta
-hi def link virgilThis Exception
-"syn match PreProc  '\(^\s*\[\s*\)\@<=\w\w*\ze\s*.*\]'
+hi def link virgilThis Label
+
 syn match Repeat   "\([^\.]\.\)\@<=\w\w*\(\(\[.*\]\)*\s*(\)\@!"
-"syn match Float    "\([0-9]\+\.\)\@<=[0-9][0-9]*\(f32\|f64\)*"
-syn match virgilThis '\(\w\)\@<!this\(\w\)\@!'
+
+"syn match PreProc  '\(^\s*\[\s*\)\@<=\w\w*\ze\s*.*\]'
 "syn match virgilType '\(\sas\s\+\W*\)\@<=\w\+'
 "syn match virgilType '\(:\s*\(\(\(\[.*\]\)\|\({.*}\)\|\(\w\+\)\|\(\*\|?\|!\)\)\s*\)*\)\@<=\w\w*'
 syn match virgilType '\(:\s*\)\@<=\w\w*\(\(\(\(\[.*\]\)\|\({.*}\)\|\(\w\+\)\|\(\*\|?\|!\)\)\s*\)*\)\@='
@@ -70,19 +71,17 @@ syn match  virgilCharacter        "'[^']*'" contains=virgilSpecialChar,virgilSpe
 syn match  virgilCharacter        "'\\''" contains=virgilSpecialChar
 syn match  virgilCharacter        "'[^\\]'"
 
-syn match virgilNumber "\<\(0[bB][0-1]\+\|0[0-7]*\|0[xX]\x\+\|\d\(\d\|_\d\)*\)[lL]\=\>"
-syn match virgilNumber "\(\<\d\(\d\|_\d\)*\.\(\d\(\d\|_\d\)*\)\=\|\.\d\(\d\|_\d\)*\)\([eE][-+]\=\d\(\d\|_\d\)*\)\=[fFdD]\="
-syn match virgilNumber "\<\d\(\d\|_\d\)*[eE][-+]\=\d\(\d\|_\d\)*[fFdD]\=\>"
-syn match virgilNumber "\<\d\(\d\|_\d\)*\([eE][-+]\=\d\(\d\|_\d\)*\)\=[fFdD]\>"
+syn match virgilNumber "\v<0[xX][0-9a-fA-F_]+[iuIU]?[lL]?>"
+syn match virgilNumber "\v<0[bB][01_]+[iuIU]?[lL]?>"
 
-syn match virgilFloat '\v<\.?\d+([eE][+-]?\d+)?(f32|f64)?>' display
-syn match virgilFloat '\v<(0|[1-9]\d*)([eE][+-]?\d+)?(f32|f64)>' display
-syn match virgilFloat '\v<0x\x+(\.\x+)?[pP][+-]?\d+(f32|f64)?>' display
+syn match virgilFloat '\v<\.?\d+([eE][+-]?\d+)?[fFdD]?>' display
+syn match virgilFloat '\v<(0|[1-9]\d*)([eE][+-]?\d+)?[fFdD]?>' display
+syn match virgilFloat '\v<0x\x+(\.\x+)?[pP][+-]?\d+[fFdD]?>' display
 " Integer literals
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iu](8|16|32|64)?|z)?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0b[01]+([iu](8|16|32|64)?|z)?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0o\o+([iu](8|16|32|64)?|z)?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0x\x+([iu](8|16|32|64)?|z)?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iuIU][lL]?[1-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0b[01]+([iuIU][lL]?[0-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0o\o+([iuIU][lL]?[0-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0x\x+([iuIU][lL]?[0-9]{-,3})?>' display
 " Escape sequences
 syn match virgilEscape '\\[\\'"0abfnrtv]' contained display
 syn match virgilEscape '\v\\(x\x{2}|u\x{4}|U\x{8})' contained display
@@ -91,6 +90,7 @@ syn match virgilFormat '\v\{\d*(\%\d*|:([- +=befgoxX]|F[.2sESU]|\.?\d+|_(.|\\([\
 syn match virgilFormat '{{\|}}' contained display
 
 
+hi def link virgilSuper                 Title
 hi def link virgilFloat                 Number
 hi def link virgilInteger               Number
 hi def link virgilEscape                SpecialComment
