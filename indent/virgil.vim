@@ -20,7 +20,7 @@ setlocal expandtab
 " J1 -> see j1
 " *0 -> don't search for unclosed block comments
 " #1 -> don't deindent lines that begin with #
-setlocal cinoptions=Ls,l1,g0,t0,(s,j0,J0,p0
+setlocal cinoptions=Ls,l1,g0,t0,(s,j1,J1,p0,)0
 
 " Controls which keys reindent the current line.
 " 0{     -> { at beginning of line
@@ -51,11 +51,11 @@ function! GetOcenIndent(lnum)
     let prevLine = getline(prevLineNum)
     let sw = shiftwidth()
 
+    if prevLine =~ '\v;|}\s*$'
+        return indent(currentLineNum)
+    endif
     "if currentLine =~ '\v^\s*[)\]}]\s*(\/\/.*)?$'
     "return indent(currentLineNum)
-    "endif
-    "if prevLine =~ '\v^\s*break\s*(\/\/.*)?$'
-    "return indent(prevLineNum) - sw
     "endif
     "if prevLine =~ '\v([(\[{:])\s*(\/\/.*)?$'
     "return indent(prevLineNum) + sw
