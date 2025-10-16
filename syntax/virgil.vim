@@ -71,17 +71,17 @@ syn match  virgilCharacter        "'[^']*'" contains=virgilSpecialChar,virgilSpe
 syn match  virgilCharacter        "'\\''" contains=virgilSpecialChar
 syn match  virgilCharacter        "'[^\\]'"
 
-syn match virgilNumber "\v<0[xX][0-9a-fA-F_]+[iuIU]?[lL]?>"
-syn match virgilNumber "\v<0[bB][01_]+[iuIU]?[lL]?>"
+syn match virgilNumber "\v<0[xX][0-9a-fA-F_]+([iuIU]?[lL]?[0-9]{-,3})?>"
+syn match virgilNumber "\v<0[bB][01_]+([iuIU]?[lL]?[0-9]{-,3})?>"
 
 syn match virgilFloat '\v<\.?\d+([eE][+-]?\d+)?[fFdD]?>' display
 syn match virgilFloat '\v<(0|[1-9]\d*)([eE][+-]?\d+)?[fFdD]?>' display
 syn match virgilFloat '\v<0x\x+(\.\x+)?[pP][+-]?\d+[fFdD]?>' display
 " Integer literals
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iuIU][lL]?[1-9]{-,3})?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0b[01]+([iuIU][lL]?[0-9]{-,3})?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0o\o+([iuIU][lL]?[0-9]{-,3})?>' display
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0x\x+([iuIU][lL]?[0-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iuIU]?[lL]?[1-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0b[01]+([iuIU]?[lL]?[0-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0o\o+([iuIU]?[lL]?[0-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0x\x+([iuIU]?[lL]?[0-9]{-,3})?>' display
 " Escape sequences
 syn match virgilEscape '\\[\\'"0abfnrtv]' contained display
 syn match virgilEscape '\v\\(x\x{2}|u\x{4}|U\x{8})' contained display
