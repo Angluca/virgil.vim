@@ -33,12 +33,12 @@ setlocal cinoptions=Ls,l1,g0,t0,(s,j1,J1,p0,)0
 " e      -> else
 " 0=case -> case
 setlocal indentkeys=o,O,0{,0},0),0],!^F, ",!<Tab>
-"setlocal cinwords=if,else,for,while,switch,match
-setlocal indentexpr=GetOcenIndent(v:lnum)
+"setlocal cinwords=if,else,for,while,match
+setlocal indentexpr=GetVirgilIndent(v:lnum)
 
 let b:undo_indent = "setlocal cindent< cinkeys< cinoptions < indentexpr <"
 
-function! GetOcenIndent(lnum)
+function! GetVirgilIndent(lnum)
     let currentLineNum = a:lnum
     let currentLine = getline(a:lnum)
 
@@ -51,17 +51,8 @@ function! GetOcenIndent(lnum)
     let prevLine = getline(prevLineNum)
     let sw = shiftwidth()
 
-    if prevLine =~ '\v;|}\s*$'
-        return indent(currentLineNum)
-    endif
-    "if currentLine =~ '\v^\s*[)\]}]\s*(\/\/.*)?$'
-    "return indent(currentLineNum)
-    "endif
-    "if prevLine =~ '\v([(\[{:])\s*(\/\/.*)?$'
-    "return indent(prevLineNum) + sw
-    "endif
-    "if prevLine =~ '\v([^(]&[^\[]&[^\{]&[^:])\s*$'
-    "return indent(prevLineNum)
+    "if prevLine =~ '\v}\s*$'
+        "return indent(currentLineNum)
     "endif
 
     return cindent(a:lnum)
