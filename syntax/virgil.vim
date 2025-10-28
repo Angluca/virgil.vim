@@ -20,12 +20,11 @@ syn keyword virgilConditional if else
 
 syn keyword virgilType Array
 syn keyword virgilType bool byte void
-syn keyword virgilType Range range
+syn keyword virgilType Range
 syn keyword virgilType string
 syn keyword virgilCharacter true null false
 syn keyword virgilThis this
 syn keyword virgilType short int long float double
-syn match   virgilType '\v(\.@1<!|\.\.)\zs<([iu][0-9]{1,3})?>' display
 
 "syn match virgilOperator "\v\-\>"
 "syn match virgilOperator "\v\=\>"
@@ -37,9 +36,9 @@ syn match   virgilType '\v(\.@1<!|\.\.)\zs<([iu][0-9]{1,3})?>' display
 "syn match   virgilComment "//.*$" contains=virgilTodo,@Spell
 
 syn match PreProc        '[@]'
-syn match virgilSymbol   '[,;]'
+syn match virgilSymbol   '[,;:\.]'
 syn match Operator       '[\+\-\%=\/\^\&\*!?><\$|]'
-syn match SpecialComment '[`:\.#]'
+syn match SpecialComment '[`#]'
 syn match Constant       '[{}\[\]()]'
 hi def virgilSymbol ctermfg=DarkGray guifg=DarkGray
 
@@ -50,19 +49,19 @@ hi def link virgilType MoreMsg
 "hi def virgilThis ctermfg=DarkMagenta guifg=DarkMagenta
 hi def link virgilThis Label
 
-syn match Repeat   "\([^\.]\.\)\@<=\w\w*\(\(\[.*\]\)*\s*(\)\@!"
+syn match virgilTypedef '\<\w\+\(\(<.*>\)\?\s*\.\w\+.*(.*).*{\s*\(.*}\)\?$\)\@='
+syn match virgilType    '\<\w\+_\l\>'
+syn match virgilType    '\<[_]*\u[A-Z_]*[a-z_]\+\w*\>'
+syn match Macro         '\<[_]*\u[A-Z_]*\>'
+syn match Exception     '\(\W\@<=[@&\*]\+\ze\w\)\|\(\w\@<=[&\*]\+\ze\W\)'
+syn match virgilType    '\v(\.@1<!|\.\.)\zs<([iu][0-9]{1,3})?>'
+syn match Repeat        '\([^\.]\.\)\@<=\w\w*\(\(\[.*\]\)*\s*(\)\@!'
 
-"syn match PreProc  '\(^\s*\[\s*\)\@<=\w\w*\ze\s*.*\]'
-"syn match virgilType '\(\sas\s\+\W*\)\@<=\w\+'
-"syn match virgilType '\(:\s*\(\(\(\[.*\]\)\|\({.*}\)\|\(\w\+\)\|\(\*\|?\|!\)\)\s*\)*\)\@<=\w\w*'
-syn match virgilType '\(:\s*\)\@<=\w\w*\(\(\(\(\[.*\]\)\|\({.*}\)\|\(\w\+\)\|\(\*\|?\|!\)\)\s*\)*\)\@='
-"syn match virgilType '\(\(\W\|^\)\(let\|const\|def\)\s\+[^=]*\w\s*)*\s*:\s*\W*\|^\W*\w\w*\s*:\w*\)\@<=\w\+'
+syn match virgilType    '\(:\s*\)\@<=\w\w*\(\(\(\(\[.*\]\)\|\({.*}\)\|\(\w\+\)\|\(\*\|?\|!\)\)\s*\)*\)\@='
 
-"syn match virgilFunc    "\w\(\w\)*\ze\(\[.*\]\s*\)*\s*("
-syn match virgilType    "\w\(\w\)*<"he=e-1,me=e-1 " foo<T>();
-"syn match virgilType    "\w\(\w\)*\ze\(<.*>\s*\)*::[^<]"
-syn match virgilType    "\(->\s*\)\@<=\w\(\w\)*"
-syn match virgilFunc   "[0-9a-zA-Z_@]*\w\w*\(\(<.*>\s*\)*\(\[.*\]\)*\s*(\)\@="
+syn match virgilType    '\v\w+\ze\<.*\>' "foo<T>();
+syn match virgilType    '\(->\s*\)\@<=\w\(\w\)*'
+syn match Function      '\v\w+\ze((\[.*\])|(\<.*\>))*\s*\('
 
 syn match  virgilSpecialCharError display contained +\\\([^0-7nrt\\'"]\|[xX]\x\{2}\)+
 syn match  virgilSpecialChar      contained "\\\([\"\\'ntr]\|[xX]\x\{2}\)"
@@ -78,7 +77,7 @@ syn match virgilFloat '\v<\.?\d+([eE][+-]?\d+)?[fFdD]?>' display
 syn match virgilFloat '\v<(0|[1-9]\d*)([eE][+-]?\d+)?[fFdD]?>' display
 syn match virgilFloat '\v<0x\x+(\.\x+)?[pP][+-]?\d+[fFdD]?>' display
 " Integer literals
-syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iuIU]?[lL]?[1-9]{-,3})?>' display
+syn match virgilInteger '\v(\.@1<!|\.\.)\zs<(0|[1-9]\d*)([eE][+-]?\d+)?([iuIU]?[lL]?[0-9]{-,3})?>' display
 syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0b[01]+([iuIU]?[lL]?[0-9]{-,3})?>' display
 syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0o\o+([iuIU]?[lL]?[0-9]{-,3})?>' display
 syn match virgilInteger '\v(\.@1<!|\.\.)\zs<0x\x+([iuIU]?[lL]?[0-9]{-,3})?>' display
