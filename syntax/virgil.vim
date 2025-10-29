@@ -51,9 +51,9 @@ hi def link virgilThis Label
 
 syn match virgilTypedef '\<\w\+\(\(<.*>\)\?\s*\.\w\+.*(.*).*{\s*\(.*}\)\?$\)\@='
 syn match virgilType    '\<\w\+_\l\>'
-syn match virgilType    '\<[_]*\u[A-Z_]*[a-z_]\+\w*\>'
-syn match Macro         '\<[_]*\u[A-Z_]*\>'
-syn match Exception     '\(\W\@<=[@&\*]\+\ze\w\)\|\(\w\@<=[&\*]\+\ze\W\)'
+syn match virgilType    '\<[_]*\u[A-Z0-9_]*[a-z0-9_]\+\w*\>'
+syn match Macro         '\<[_]*\u[A-Z0-9_]*\>'
+syn match Exception     '\(\W\@<=[@&*]\+\ze\w\)\|\(\w\@<=[*]\+\ze\W\)'
 syn match virgilType    '\v(\.@1<!|\.\.)\zs<([iu][0-9]{1,3})?>'
 syn match Repeat        '\([^\.]\.\)\@<=\w\w*\(\(\[.*\]\)*\s*(\)\@!'
 
